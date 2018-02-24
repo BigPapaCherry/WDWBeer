@@ -3,34 +3,30 @@ from pprint import pprint
 from BeautifulSoup import BeautifulSoup
 import re
 
-
 url = 'https://disneyworld.disney.go.com/dining/hollywood-studios/baseline-tap-house/menus/'
 response = requests.get(url)
 html = response.content
-beerTypes = ['IPA', 'Ale', 'Lager', 'Stout', 'Pilsner', 'Pils', 'Porter', 'Hefeweizen']
+beerTypes = ['IPA', 'Ale', 'Lager', 'Stout', 'Pilsner', 'Pils', 'Porter', 'Hefeweizen', 'Beer']
 
 soup = BeautifulSoup(html)
 
-
-#table = soup.find('div', attrs={'class':'group', 'id':'Alcoholic Beverage'})
-
 names = []
 prices = []
-for table in soup.findAll('div', attrs={'class':'group', 'id':'Alcoholic Beverage'}):
-	for item in table.findAll('div', attrs={'class':'item'}):
-	#    dict = {}
-		name = item.find('h4', attrs={'class':'item-title'}).text
-		price = item.findAll('div', attrs={'class':'price-value'})[1]
-	#    dict['description'] = item.find('div', attrs={'class':'item-description'}).text
+for table in soup.findAll('div', attrs={'class': 'group', 'id': 'Alcoholic Beverage'}):
+    title = table.find('h3', attrs={'class': 'group-title'}).text
+    if any(type in title for type in beerTypes):
+        for item in table.findAll('div', attrs={'class': 'item'}):
 
-	#    dict['price'] = item.find('div', attrs={'class':'price-value'}).text
-	#    content.append(dict)
-		#if not re.search('Flight', name) :
-		if any(type in name for type in beerTypes):
-			names.append(name)
-	#        for pri in price:
-	#            pprint(pri.text)
-	#		pprint(price.text)
+            name = item.find('h4', attrs={'class': 'item-title'}).text
+            pprint('Title Said Beer')
+            names.append(name)
+    else:
+        for item in table.findAll('div', attrs={'class': 'item'}):
 
-pprint(list(set(names)))  
+            name = item.find('h4', attrs={'class': 'item-title'}).text
+            price = item.findAll('div', attrs={'class': 'price-value'})[1]
 
+            if any(type in name for type in beerTypes):
+                names.append(name)
+
+pprint(list(set(names)))
