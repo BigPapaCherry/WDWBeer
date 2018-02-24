@@ -7,7 +7,7 @@ import re
 url = 'https://disneyworld.disney.go.com/dining/hollywood-studios/baseline-tap-house/menus/'
 response = requests.get(url)
 html = response.content
-
+beerTypes = ['IPA', 'Ale', 'Lager', 'Stout', 'Pilsner', 'Pils', 'Porter', 'Hefeweizen']
 
 soup = BeautifulSoup(html)
 
@@ -25,12 +25,12 @@ for table in soup.findAll('div', attrs={'class':'group', 'id':'Alcoholic Beverag
 
 	#    dict['price'] = item.find('div', attrs={'class':'price-value'}).text
 	#    content.append(dict)
-		if not re.search('Flight', name) :   
+		#if not re.search('Flight', name) :
+		if any(type in name for type in beerTypes):
 			names.append(name)
 	#        for pri in price:
 	#            pprint(pri.text)
-			pprint(price.text)
+	#		pprint(price.text)
 
 pprint(list(set(names)))  
 
-    
