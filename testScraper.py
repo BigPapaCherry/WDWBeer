@@ -29,3 +29,4 @@ pprint(list(set(names)))
 //triples subject, predicate and obect. neo4j is a graph database. semantic database -> look for a beer ontology
 
 //double metaphone. written word for how it sounds. fuzzy matching. check npm
+//dbpedia - check for beer names. possbile untappd replacement. 
