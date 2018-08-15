@@ -25,3 +25,6 @@ for table in soup.findAll('div', attrs={'class': 'group', 'id': 'Alcoholic Bever
 
 
 pprint(list(set(names)))
+
+//triples subject, predicate and obect. neo4j is a graph database. semantic database -> look for a beer ontology
+
