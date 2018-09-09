@@ -35,7 +35,7 @@ for table in soup.findAll('div', attrs={'class': 'group', 'id': 'Alcoholic Bever
 
 pprint(list(set(names)))
 
-//triples subject, predicate and obect. neo4j is a graph database. semantic database -> look for a beer ontology
+#triples subject, predicate and obect. neo4j is a graph database. semantic database -> look for a beer ontology
 
-//double metaphone. written word for how it sounds. fuzzy matching. check npm
-//dbpedia - check for beer names. possbile untappd replacement. 
+#double metaphone. written word for how it sounds. fuzzy matching. check npm
+## dbpedia - check for beer names. possbile untappd replacement.
