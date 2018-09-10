@@ -4,9 +4,10 @@ from pprint import pprint
 from selenium.webdriver.chrome.options import Options
 import re
 import restaurantInfoGrabber
+import sys
 
 url = "https://disneyworld.disney.go.com/dining/"
-maps_API_key = 'AIzaSyCigvAncAdGC5Qk17o79XiNdb_eXuhuJh0'
+maps_API_key = 'destroyedOldKey,figureouthowtoobfuscatenextkey'
 
 chrome_options = Options()
 chrome_options.add_argument("--headless")
@@ -18,12 +19,28 @@ driver = webdriver.Chrome(chrome_options=chrome_options, executable_path="/usr/l
 driver.get(url)
 html = driver.page_source
 
+
+def progress(count, total, status=''):
+    bar_len = 60
+    filled_len = int(round(bar_len * count / float(total)))
+
+    percents = round(100.0 * count / float(total), 1)
+    bar = '=' * filled_len + '-' * (bar_len - filled_len)
+
+    sys.stdout.write('[%s] %s%s ...%s\r' % (bar, percents, '%', status))
+    sys.stdout.flush()
+
+
 soup = BeautifulSoup(html)
 
 urls = []
-restHtml = open('./restHtml', 'w+')
+# restHtml = open('./restHtml', 'w+')
 items = soup.findAll('li', attrs={'class': 'card show dining ', 'data-entityid': re.compile('entityType=restaurant$')})
+length = len(items)
+current = 0
 for item in items:
+    progress(current, length, '')
+    current += 1
     link = item.find('a', href=True)
     #pprint(link)
     if link is not None:
