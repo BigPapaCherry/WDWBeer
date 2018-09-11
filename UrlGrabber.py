@@ -1,4 +1,4 @@
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 from selenium import webdriver
 from pprint import pprint
 from selenium.webdriver.chrome.options import Options
@@ -12,8 +12,11 @@ maps_API_key = 'destroyedOldKey,figureouthowtoobfuscatenextkey'
 chrome_options = Options()
 chrome_options.add_argument("--headless")
 chrome_options.add_argument("--window-size=1920x1080")
+windows_path = "C:\Program Files (x86)\chromedriver\chromedriver.exe"
+mac_path = "/usr/local/bin/chromedriver"
 
-driver = webdriver.Chrome(chrome_options=chrome_options, executable_path="/usr/local/bin/chromedriver")
+
+driver = webdriver.Chrome(chrome_options=chrome_options, executable_path=windows_path)
 
 
 driver.get(url)
@@ -31,7 +34,7 @@ def progress(count, total, status=''):
     sys.stdout.flush()
 
 
-soup = BeautifulSoup(html)
+soup = BeautifulSoup(html, features="html.parser")
 
 urls = []
 # restHtml = open('./restHtml', 'w+')

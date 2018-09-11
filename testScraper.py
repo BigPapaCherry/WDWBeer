@@ -1,6 +1,6 @@
 import requests
 from pprint import pprint
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 import re
 
 default_url = 'https://disneyworld.disney.go.com/dining/disney-springs/paddlefish/menus/'
@@ -16,7 +16,7 @@ commaListWithOrRegex = "(([a-zA-Z'\s])*,)*\sor(.*)"
 def store_beer_names( url ):
     response = requests.get(url)
     html = response.content
-    soup = BeautifulSoup(html)
+    soup = BeautifulSoup(html, features="html.parser")
 
     names = []
     prices = []

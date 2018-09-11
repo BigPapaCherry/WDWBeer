@@ -1,6 +1,6 @@
 import requests
 from pprint import pprint
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 from neo4j.v1 import GraphDatabase
 import testScraper
 
@@ -17,7 +17,6 @@ def format_menu_url(url):
     return url + "menus/"
 
 
-
 def grab_restaurant_data(url):
     response = requests.get(url)
     # pprint(format_menu_url(url))
@@ -25,7 +24,7 @@ def grab_restaurant_data(url):
     # pprint(list(set(names)))
     if names:
         html = response.content
-        soup = BeautifulSoup(html)
+        soup = BeautifulSoup(html, features="html.parser")
         rest_name = soup.find('h1')
         restParkLoc = soup.find('p', attrs={'class': 'locationParkResort location line1'})
         restParkSubLoc = soup.find('p', attrs={'class': 'locationLandArea location line2'})
