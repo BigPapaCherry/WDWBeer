@@ -5,6 +5,7 @@ from selenium.webdriver.chrome.options import Options
 import re
 import restaurantInfoGrabber
 import sys
+import platform
 
 url = "https://disneyworld.disney.go.com/dining/"
 maps_API_key = 'destroyedOldKey,figureouthowtoobfuscatenextkey'
@@ -12,11 +13,12 @@ maps_API_key = 'destroyedOldKey,figureouthowtoobfuscatenextkey'
 chrome_options = Options()
 chrome_options.add_argument("--headless")
 chrome_options.add_argument("--window-size=1920x1080")
-windows_path = "C:\Program Files (x86)\chromedriver\chromedriver.exe"
-mac_path = "/usr/local/bin/chromedriver"
+if platform.system() is 'Windows':
+    driver_path = "C:\Program Files (x86)\chromedriver\chromedriver.exe"
+else:
+    driver_path = "/usr/local/bin/chromedriver"
 
-
-driver = webdriver.Chrome(chrome_options=chrome_options, executable_path=windows_path)
+driver = webdriver.Chrome(chrome_options=chrome_options, executable_path=driver_path)
 
 
 driver.get(url)
