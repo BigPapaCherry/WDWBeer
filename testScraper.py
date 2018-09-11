@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 import re
 
 default_url = 'https://disneyworld.disney.go.com/dining/disney-springs/paddlefish/menus/'
-variable_url = 'https://disneyworld.disney.go.com/dining/hollywood-studios/50s-prime-time-cafe/menus/'
+variable_url = 'https://disneyworld.disney.go.com/dining/boardwalk/trattoria-al-forno/menus/dinner'
 
 beerTypes = ['IPA', 'Ale', 'Lager', 'Stout', 'Pilsner', 'Pils', 'Porter', 'Hefeweizen', 'Beer', 'Draft', 'Kolsch', 'Dry', "Imported", "Domestic", "Birra", "Blond"]
 sep = ','
@@ -35,8 +35,8 @@ def store_beer_names( url ):
             # el
             if any(type in title for type in beerTypes) or any(type in name for type in beerTypes):
                 # name = re.sub(suffixToBeRemoved, '', name).strip()
-                names.append(name)
-    # pprint(list(set(names)))
+                names.append(name.strip(' \t\n\r'))
+   # pprint(list(set(names)))
     return names
 
 
