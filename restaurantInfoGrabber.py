@@ -64,7 +64,7 @@ def grab_restaurant_data(url):
                 # pprint('processing ' + beer)
                 #pprint('adding '+ beer+ ' to graph')
                 q = '''MATCH (rest:Restaurant {name:"''' + rest_name.text.replace('"', '\\"').strip(' \t\n\r') + '''"})
-                MERGE (beerName:Beer {name:"''' + beer.replace('"', '\\"').strip(' \t\n\r') + '''"})
+                MERGE (beerName:Beer {name:"''' + beer.replace('"', '\\"') + '''"})
                 MERGE (rest)-[:SERVES]->(beerName)'''
                 #pprint(q)
                 sess.run(q)
@@ -72,8 +72,8 @@ def grab_restaurant_data(url):
            # pprint('Restaurant Name: ' + rest_name.text)
            # pprint('Park/Resort Area: ' + restParkLoc.text)
            # pprint('Park Area/Resort: ' + restParkSubLoc.text)
-    else:
-        pprint("No beers to process url: " + url)
+#    else:
+#        pprint("No beers to process url: " + url)
 
 
 if __name__ == "__main__":

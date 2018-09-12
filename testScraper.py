@@ -4,13 +4,18 @@ from bs4 import BeautifulSoup
 import re
 
 default_url = 'https://disneyworld.disney.go.com/dining/disney-springs/paddlefish/menus/'
-variable_url = 'https://disneyworld.disney.go.com/dining/boardwalk/trattoria-al-forno/menus/dinner'
+variable_url = 'https://disneyworld.disney.go.com/dining/dolphin-hotel/cabana-bar-and-beach-club/menus/'
 
 beerTypes = ['IPA', 'Ale', 'Lager', 'Stout', 'Pilsner', 'Pils', 'Porter', 'Hefeweizen', 'Beer', 'Draft', 'Kolsch', 'Dry', "Imported", "Domestic", "Birra", "Blond"]
 sep = ','
 sep2 = '-'
 suffixToBeRemoved = '((\(.*\))|(Beer)|(Draft)|(\d\d-)|(-)|(,)).*'
 commaListWithOrRegex = "(([a-zA-Z'\s])*,)*\sor(.*)"
+nonBeerTypes = ['Seasonal', 'Flight', 'Assorted', 'Ask', 'Bottled Beer', 'Canned Beer', 'Draft Beer', 'Woodbridge',
+                'Sangria', 'Wine', 'Margarita', 'Premium and Craft', 'Domestic Beer', 'Craft Beer Bucket',
+                'Pinot', 'Rosé', 'Root Beer Float', 'Domestic and Craft', 'Cabernet',
+                'Imported Beer', 'Premium Beer', 'Draft Beers', 'Bottled Beers', 'Merlot', 'Chardonnay',
+                'Specialty Tap Rotation' ]
 
 
 def store_beer_names( url ):
@@ -33,10 +38,11 @@ def store_beer_names( url ):
             #     lastNames = listToSep[len(listToSep)-1].split(" or ")
             #     pprint(lastNames)
             # el
-            if any(type in title for type in beerTypes) or any(type in name for type in beerTypes):
-                # name = re.sub(suffixToBeRemoved, '', name).strip()
+            if (any(type in title for type in beerTypes) or any(type in name for type in beerTypes)) and not any(type in name for type in nonBeerTypes):
+                # if not any(type in name for type in nonBeerTypes):
+                    # name = re.sub(suffixToBeRemoved, '', name).strip()
                 names.append(name.strip(' \t\n\r'))
-   # pprint(list(set(names)))
+    pprint(list(set(names)))
     return names
 
 
