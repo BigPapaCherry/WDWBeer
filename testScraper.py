@@ -15,11 +15,11 @@ nonBeerTypes = ['Seasonal', 'Flight', 'Assorted', 'Ask', 'Bottled Beer', 'Canned
                 'Sangria', 'Wine', 'Margarita', 'Premium and Craft', 'Domestic Beer', 'Craft Beer Bucket',
                 'Pinot', 'Rosé', 'Root Beer Float', 'Domestic and Craft', 'Cabernet',
                 'Imported Beer', 'Premium Beer', 'Draft Beers', 'Bottled Beers', 'Merlot', 'Chardonnay',
-                'Specialty Tap Rotation' ]
+                'Specialty Tap Rotation', 'Vino' ]
 
 
 def store_beer_names( url ):
-    response = requests.get(url)
+    response = requests.get(url, headers={'authority': 'disneyworld.disney.go.com','method': 'GET', 'path': '/dining/boardwalk/abracadabar/', 'scheme': 'https', 'accept': '*/*', 'accept-encoding': 'gzip, deflate, br', 'accept-language': 'en-US,en;q=0.9', 'content-type': 'application/x-www-form-urlencoded; charset=UTF-8','referer': 'https://disneyworld.disney.go.com/dining/boardwalk/abracadabar/', 'sec-fetch-mode': 'cors', 'sec-fetch-site': 'same-origin', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36', 'x-requested-with': 'XMLHttpRequest'})
     html = response.content
     soup = BeautifulSoup(html, features="html.parser")
 
@@ -42,7 +42,7 @@ def store_beer_names( url ):
                 # if not any(type in name for type in nonBeerTypes):
                     # name = re.sub(suffixToBeRemoved, '', name).strip()
                 names.append(name.strip(' \t\n\r'))
-    pprint(list(set(names)))
+    # pprint(list(set(names)))
     return names
 
 
